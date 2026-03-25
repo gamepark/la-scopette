@@ -17,6 +17,8 @@ export class GameTemplateRules
     [RuleId.TheFirstStep]: TheFirstStepRule
   }
 
+  locationsStrategies = {}
+
   giveTime(): number {
     return 60
   }
