@@ -1,1 +1,6 @@
-export enum MaterialType {}
+export enum MaterialType {
+  ColorCard,
+  SymbolCard,
+  NumberCard,
+  ScopetteToken
+}

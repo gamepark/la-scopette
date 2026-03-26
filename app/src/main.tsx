@@ -1,6 +1,6 @@
-import { GameTemplateOptionsSpec } from '@gamepark/la-scopette/GameTemplateOptions'
-import { GameTemplateRules } from '@gamepark/la-scopette/GameTemplateRules'
-import { GameTemplateSetup } from '@gamepark/la-scopette/GameTemplateSetup'
+import { GameTemplateOptionsSpec } from '@gamepark/la-scopette/LaScopetteOptions.ts'
+import { LaScopetteRules } from '@gamepark/la-scopette/LaScopetteRules.ts'
+import { LaScopetteSetup } from '@gamepark/la-scopette/LaScopetteSetup.ts'
 import { GameProvider } from '@gamepark/react-game'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
@@ -13,9 +13,9 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <GameProvider
       game="la-scopette"
-      Rules={GameTemplateRules}
+      Rules={LaScopetteRules}
       optionsSpec={GameTemplateOptionsSpec}
-      GameSetup={GameTemplateSetup}
+      GameSetup={LaScopetteSetup}
       material={Material}
       locators={Locators}
       animations={gameAnimations}
