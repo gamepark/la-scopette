@@ -1,5 +1,8 @@
+import { LocationType } from '@gamepark/la-scopette/material/LocationType.ts'
+import { MaterialType } from '@gamepark/la-scopette/material/MaterialType.ts'
 import { Numbers } from '@gamepark/la-scopette/material/Numbers.ts'
-import { CardDescription } from '@gamepark/react-game'
+import { CardDescription, ItemContext } from '@gamepark/react-game'
+import { isMoveItemType, MaterialMove } from '@gamepark/rules-api'
 import Back from '../images/Card/numbers/NumbersBack.jpg'
 import Gold1 from '../images/Card/numbers/NumbersGold1.jpg'
 import Gold4 from '../images/Card/numbers/NumbersGold4.jpg'
@@ -162,6 +165,11 @@ export class NumberCardDescription extends CardDescription {
     [Numbers.Yellow10]: Yellow10,
     [Numbers.YellowMinus1]: YellowMinus1,
     [Numbers.YellowMinus2]: YellowMinus2,
+  }
+
+  canShortClick(move: MaterialMove, context: ItemContext): boolean {
+    return isMoveItemType(MaterialType.NumberCard)(move) && move.itemIndex === context.index && move.location.type === LocationType.CardsInPlayLayout
+      || isMoveItemType(MaterialType.NumberCard)(move) && move.itemIndex === context.index && move.location.player === context.player && move.location.type === LocationType.PlayerNumberCardsTakenStock
   }
 }
 

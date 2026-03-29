@@ -1,7 +1,11 @@
 import { RuleId } from '@gamepark/la-scopette/rules/RuleId'
 import { ComponentType } from 'react'
-import { TheFirstStepHeader } from './TheFirstStepHeader'
+import { CheckScopettesHeader } from './CheckScopettesHeader.tsx'
+import { DrawCardHeader } from './DrawCardHeader.tsx'
+import { PlayCardHeader } from './PlayCardHeader.tsx'
 
 export const Headers: Partial<Record<RuleId, ComponentType>> = {
-  [RuleId.TheFirstStep]: TheFirstStepHeader
+  [RuleId.PlayCard]: PlayCardHeader,
+  [RuleId.CheckScopettes]: CheckScopettesHeader,
+  [RuleId.DrawCard]: DrawCardHeader
 }

@@ -1,4 +1,5 @@
 import {
+  CompetitiveScore,
   hideItemId,
   hideItemIdToOthers,
   MaterialGame,
@@ -9,7 +10,10 @@ import {
 } from '@gamepark/rules-api'
 import { LocationType } from './material/LocationType'
 import { MaterialType } from './material/MaterialType'
-import { TheFirstStepRule } from './rules/TheFirstStepRule'
+import { CheckScopettesRule } from './rules/CheckScopettesRule'
+import { DrawCardRule } from './rules/DrawCardRule'
+import { ScoreHelper } from './rules/helper/ScoreHelper'
+import { PlayCardRule } from './rules/PlayCardRule'
 import { RuleId } from './rules/RuleId'
 
 /**
@@ -18,17 +22,22 @@ import { RuleId } from './rules/RuleId'
  */
 export class LaScopetteRules
   extends SecretMaterialRules<number, MaterialType, LocationType>
-  implements TimeLimit<MaterialGame<number, MaterialType, LocationType>, MaterialMove<number, MaterialType, LocationType>, number>
+  implements TimeLimit<MaterialGame, MaterialMove, number>, CompetitiveScore<MaterialGame, MaterialMove, number>
 {
+  scoreHelper = new ScoreHelper(this.game)
+  rankByLowerScore?: boolean | undefined
   rules = {
-    [RuleId.TheFirstStep]: TheFirstStepRule
+    [RuleId.PlayCard]: PlayCardRule,
+    [RuleId.CheckScopettes]: CheckScopettesRule,
+    [RuleId.DrawCard]: DrawCardRule,
   }
 
   locationsStrategies = {
     [MaterialType.NumberCard]: {
       [LocationType.Deck]: new PositiveSequenceStrategy(),
       [LocationType.Table]: new PositiveSequenceStrategy(),
-      [LocationType.PlayerHand]: new PositiveSequenceStrategy()
+      [LocationType.PlayerHand]: new PositiveSequenceStrategy(),
+      [LocationType.CardsInPlayLayout]: new PositiveSequenceStrategy()
     },
     [MaterialType.ColorCard]: {
       [LocationType.PlayerColorCard]: new PositiveSequenceStrategy()
@@ -47,5 +56,18 @@ export class LaScopetteRules
 
   giveTime(): number {
     return 60
+  }
+  getScore(playerId: number): number {
+    return this.scoreHelper.calculateScore(playerId)
+  }
+
+  getTieBreaker?(tieBreaker: number, playerId: number): number | undefined {
+    if (tieBreaker === 1) {
+      return this.scoreHelper.gePlayerTakenCards(playerId).length
+    }
+    if (tieBreaker === 2) {
+      return this.scoreHelper.getPlayerScopetteTokens(playerId).length
+    }
+    return undefined
   }
 }

@@ -7,4 +7,5 @@ export enum LocationType {
   PlayerSymbolCard,
   PlayerNumberCardsTakenStock,
   PlayerScopetteTokenStock,
+  CardsInPlayLayout
 }

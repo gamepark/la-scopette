@@ -31,6 +31,6 @@ export class LaScopetteSetup extends MaterialGameSetup<number, MaterialType, Loc
   }
 
   start() {
-    this.startPlayerTurn(RuleId.TheFirstStep, this.players[0])
+    this.startPlayerTurn(RuleId.PlayCard, this.players[0])
   }
 }
