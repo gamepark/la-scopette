@@ -3,6 +3,7 @@ import { MaterialType } from '@gamepark/la-scopette/material/MaterialType.ts'
 import { Numbers } from '@gamepark/la-scopette/material/Numbers.ts'
 import { CardDescription, ItemContext } from '@gamepark/react-game'
 import { isMoveItemType, MaterialMove } from '@gamepark/rules-api'
+import { NumberCardHelp } from './help/NumberCardHelp'
 import Back from '../images/Card/numbers/NumbersBack.jpg'
 import Gold1 from '../images/Card/numbers/NumbersGold1.jpg'
 import Gold4 from '../images/Card/numbers/NumbersGold4.jpg'
@@ -85,6 +86,7 @@ export class NumberCardDescription extends CardDescription {
   width = 6.3
   height = 8.8
   borderRadius = 0.3
+  help = NumberCardHelp
 
   backImage = Back
 

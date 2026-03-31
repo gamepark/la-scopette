@@ -1,5 +1,6 @@
 import { Symbols } from '@gamepark/la-scopette/material/Symbols.ts'
 import { CardDescription } from '@gamepark/react-game'
+import { SymbolCardHelp } from './help/SymbolCardHelp'
 import Coin from '../images/Card/symbols/SymbolCoin.jpg'
 import Die from '../images/Card/symbols/SymbolDie.jpg'
 import Elephant from '../images/Card/symbols/SymbolElephant.jpg'
@@ -11,6 +12,7 @@ export class SymbolCardDescription extends CardDescription {
   width = 5
   height = 5
   borderRadius = 0.1
+  help = SymbolCardHelp
 
   images = {
     [Symbols.Coin]: Coin,

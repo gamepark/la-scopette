@@ -1,5 +1,6 @@
 import { Colors } from '@gamepark/la-scopette/material/Colors.ts'
 import { CardDescription } from '@gamepark/react-game'
+import { ColorCardHelp } from './help/ColorCardHelp'
 import Back from '../images/Card/colors/ColorBack.jpg'
 import Green from '../images/Card/colors/ColorGreen.jpg'
 import Orange from '../images/Card/colors/ColorOrange.jpg'
@@ -12,6 +13,7 @@ export class ColorCardDescription extends CardDescription {
   width = 5
   height = 5
   borderRadius = 0.3
+  help = ColorCardHelp
 
   backImage = Back
 
