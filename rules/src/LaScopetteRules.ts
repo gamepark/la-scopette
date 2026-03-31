@@ -63,10 +63,10 @@ export class LaScopetteRules
 
   getTieBreaker?(tieBreaker: number, playerId: number): number | undefined {
     if (tieBreaker === 1) {
-      return this.scoreHelper.gePlayerTakenCards(playerId).length
+      return this.scoreHelper.getPlayerTakenCards(playerId).length
     }
     if (tieBreaker === 2) {
-      return this.scoreHelper.getPlayerScopetteTokens(playerId).length
+      return this.scoreHelper.getPlayerScopetteTokens(playerId)
     }
     return undefined
   }

@@ -13,10 +13,10 @@ export class CheckScopettesRule extends PlayerTurnRule {
     }
 
     const tokenCount = playerEmpty && tableEmpty ? 4 : 1
-    return this.material(MaterialType.ScopetteToken)
+
+    return [this.material(MaterialType.ScopetteToken)
       .location(LocationType.ScopetteTokenStock)
-      .limit(tokenCount)
-      .moveItems({ type: LocationType.PlayerScopetteTokenStock, player: this.player })
+      .moveItem({ type: LocationType.PlayerScopetteTokenStock, player: this.player }, tokenCount)]
   }
 
   afterItemMove(_move: ItemMove<number, number, number>, _context?: PlayMoveContext): MaterialMove<number, number, number, number, number>[] {
