@@ -1,0 +1,1 @@
+export const colorSelect = "{color, select, 1{vert} 2{orange} 3{rose} 4{violet} 5{bleu} 6{jaune} other{doré}}"
