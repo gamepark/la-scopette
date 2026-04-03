@@ -1,18 +1,17 @@
-import { DropAreaDescription, ListLocator, MaterialContext } from '@gamepark/react-game'
+import { DropAreaDescription, getRelativePlayerIndex, ListLocator, MaterialContext } from '@gamepark/react-game'
 import { Coordinates, Location } from '@gamepark/rules-api'
 import { playerHandLocator } from './PlayerHandLocator.ts'
 
 export class PlayerNumberCardsTakenStockLocator extends ListLocator {
   gap = {x: 6}
-  rotateZ = 90
 
   getCoordinates(location: Location<number, number>, context: MaterialContext<number, number, number, number, number>): Partial<Coordinates> {
     const base = playerHandLocator.getCoordinates(location, context)
-    const gap = base.y > 0 ? 8 : -8
+    const index = getRelativePlayerIndex(context, location.player)
+    const gap = index === 0 ? 12 : 10
     return {
-      y: base.y + gap,
-      x: base.x,
-      z: 0,
+      y: base.y,
+      x: base.x + gap
     }
   }
 

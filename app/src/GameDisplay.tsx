@@ -1,14 +1,61 @@
 import { css } from '@emotion/react'
-import { GameTable, GameTableNavigation } from '@gamepark/react-game'
+import { DevToolsHub, GameTable, GameTableNavigation } from '@gamepark/react-game'
 import { PlayerPanels } from './panels/PlayerPanels'
 
-export function GameDisplay() {
-  const margin = { top: 7, left: 0, right: 30, bottom: 0 }
+type GameDisplayProps = {
+  players: number
+}
+
+export function GameDisplay({ players }: GameDisplayProps) {
+  const margin = { top: 7, left: 0, right: 0, bottom: 0 }
+
+  const getTableWidth = (): { xMin: number; xMax: number; yMin: number; yMax: number } => {
+    switch (players) {
+      case 2:
+        return { xMin: -40, xMax: 40, yMin: -12, yMax: 35 }
+      case 3:
+        return { xMin: -50, xMax: 50, yMin: -20, yMax: 34 }
+      case 4:
+        return { xMin: -50, xMax: 50, yMin: -20, yMax: 34 }
+      default:
+        return { xMin: -75, xMax: 50, yMin: -35, yMax: 45 }
+    }
+  }
+
+  const getNavigationCss = () => {
+    switch (players) {
+      case 1:
+      case 3:
+        return css`
+          left: 1em;
+          top: 12em;
+        `
+      case 4:
+        return css`
+          left: 1em;
+          top: 18em;
+        `
+      case 2:
+      case 5:
+      default:
+        return css`
+          left: 31em;
+          top: 8em;
+        `
+    }
+  }
   return (
     <>
-      <GameTable xMin={-50} xMax={50} yMin={-30} yMax={30} margin={margin} css={process.env.NODE_ENV === 'development' && tableBorder}>
-        <GameTableNavigation />
+      <GameTable
+        xMin={getTableWidth().xMin}
+        xMax={getTableWidth().xMax}
+        yMin={getTableWidth().yMin}
+        yMax={getTableWidth().yMax}
+        margin={margin}
+        css={process.env.NODE_ENV === 'development' && tableBorder}>
+        <GameTableNavigation css={getNavigationCss()}  />
         <PlayerPanels />
+        {process.env.NODE_ENV === 'development' && <DevToolsHub fabBottom="calc(1em + 6em * 1.7)" />}
       </GameTable>
     </>
   )

@@ -1,10 +1,22 @@
 import { css } from '@emotion/react'
-import { DeckLocator, LocationDescription } from '@gamepark/react-game'
+import { DeckLocator, LocationDescription, MaterialContext } from '@gamepark/react-game'
+import { Coordinates, Location } from '@gamepark/rules-api'
 import { numberCardDescription } from '../material/NumberCardDescription.ts'
 import { StackSpotCounter } from './component/StackSpotCounter.tsx'
 
 export class NumberCardDeckLocator extends DeckLocator {
-  coordinates = { x: -20, y: 0 }
+  getCoordinates(_location: Location, context: MaterialContext): Partial<Coordinates> {
+    const nbPlayers = context.rules.players.length
+    switch (nbPlayers) {
+      case 2:
+        return { x: -20, y: -6 }
+      case 3:
+      case 4:
+        return { x: -20, y: 6 }
+      default:
+        return { x: -30, y: 0 }
+    }
+  }
 
   location = {}
 

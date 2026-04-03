@@ -10,7 +10,7 @@ export class PlayerColorCardLocator extends ListLocator {
     const gap = base.y > 0 ? -8 : 8
     return {
       y: base.y + gap,
-      x: base.x,
+      x: context.rules.players.length === 2 ? base.x - 4 : base.x,
       z: 0,
     }
   }

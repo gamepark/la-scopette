@@ -1,41 +1,39 @@
 import { getRelativePlayerIndex, HandLocator, MaterialContext } from '@gamepark/react-game'
 import { Location } from '@gamepark/rules-api'
 
-const BOTTOM_LEFT = { x: -38, y: 22 }
-const BOTTOM_RIGHT = { x: 38, y: 22 }
-const TOP_LEFT = { x: -38, y: -22 }
-const TOP_RIGHT = { x: 38, y: -22 }
-const TOP_CENTER = { x: 0, y: -22 }
-const BOTTOM_CENTER = { x: 0, y: 22 }
-
 class PlayerHandLocator extends HandLocator {
 
   getCoordinates(location: Location, context: MaterialContext) {
     const index = getRelativePlayerIndex(context, location.player)
     switch (index) {
       case 0:
-        return BOTTOM_LEFT
+        if (context.rules.players.length === 2) return { x: -28, y: 22 }
+        if (context.rules.players.length === 3) return { x: -38, y: 22 }
+        if (context.rules.players.length === 4) return { x: -38, y: 22 }
+        return { x: -65, y: 30 }
       case 1:
-        if (context.rules.players.length === 2) return BOTTOM_RIGHT
-        return TOP_LEFT
+        if (context.rules.players.length === 2) return { x: 24, y: 22 }
+        if (context.rules.players.length === 3) return { x: -38, y: -13 }
+        if (context.rules.players.length === 4) return { x: -38, y: -13 }
+        return { x: -65, y: -19 }
       case 2:
-        if (context.rules.players.length === 3) return BOTTOM_RIGHT
-        if (context.rules.players.length === 4) return TOP_RIGHT
-        return TOP_CENTER
+        if (context.rules.players.length === 3) return { x: 34, y: 22 }
+        if (context.rules.players.length === 4) return { x: 34, y: -13 }
+        return { x: -14, y: -19 }
       case 3:
-        if (context.rules.players.length === 4) return BOTTOM_RIGHT
-        return TOP_RIGHT
+        if (context.rules.players.length === 4) return { x: 34, y: 22 }
+        return { x: 34, y: -19 }
       case 4:
-        return BOTTOM_RIGHT
+        return { x: 35, y: 30 }
       case 5:
       default:
-        return BOTTOM_CENTER
+        return { x: -14, y: 30 }
     }
   }
 
   getMaxAngle(location: Location, context: MaterialContext) {
     const playerIndex = getRelativePlayerIndex(context, location.player)
-    return playerIndex === 0 ? 10 : 2
+    return playerIndex === 0 ? 5 : 2
   }
 }
 

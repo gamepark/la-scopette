@@ -24,6 +24,12 @@ export class LaScopetteSetup extends MaterialGameSetup<number, MaterialType, Loc
 
       }
     )
+    if(this.players.length === 2) {
+      this.players.forEach( (player, index) => {
+          this.material(MaterialType.ColorCard).createItem({ id: colorCards[index+2], location: { type:  LocationType.PlayerColorCard, player} })
+        }
+      )
+    }
     this.material(MaterialType.NumberCard).location(LocationType.Deck).limit(4).moveItems({ type: LocationType.Table })
     for (let i = 0; i < 24; i++) {
       this.material(MaterialType.ScopetteToken).createItem({ location: { type: LocationType.ScopetteTokenStock } })
