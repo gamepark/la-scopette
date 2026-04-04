@@ -24,22 +24,14 @@ export function GameDisplay({ players }: GameDisplayProps) {
 
   const getNavigationCss = () => {
     switch (players) {
-      case 1:
-      case 3:
-        return css`
-          left: 1em;
-          top: 12em;
-        `
-      case 4:
-        return css`
-          left: 1em;
-          top: 18em;
-        `
       case 2:
-      case 5:
+        return css`
+          left: 1em;
+          top: 8em;
+        `
       default:
         return css`
-          left: 31em;
+          left: 41em;
           top: 8em;
         `
     }
