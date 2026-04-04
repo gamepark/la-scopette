@@ -5,7 +5,6 @@ import { numberCardData, Numbers } from '@gamepark/la-scopette/material/Numbers'
 import { MaterialGame, MaterialMoveBuilder, MoveItem } from '@gamepark/rules-api'
 import { merge } from 'es-toolkit'
 import { Trans } from 'react-i18next'
-import { colorSelect } from './cardName'
 import displayMaterialHelp = MaterialMoveBuilder.displayMaterialHelp
 
 export const TakeCardLog = ({ move, context }: MaterialLogProps<MoveItem>) => {
@@ -20,7 +19,6 @@ export const TakeCardLog = ({ move, context }: MaterialLogProps<MoveItem>) => {
   return (
     <Trans
       i18nKey="log.take-card"
-      defaults={`{player} a capturé un <numberCard>{number} ${colorSelect}</numberCard>`}
       values={{ player: playerName, color: cardData.color, number: cardData.number }}
       components={{
         numberCard: <PlayMoveButton move={displayMaterialHelp(MaterialType.NumberCard, card)} transient />

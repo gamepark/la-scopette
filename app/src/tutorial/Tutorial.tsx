@@ -40,8 +40,7 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     {
       popup: {
         text: () => (
-          <Trans i18nKey="tuto.welcome"
-            defaults="Bienvenue dans <bold>La Scopette</bold> ! Vous allez apprendre à jouer contre Sofia. Le but : capturer des cartes de la table pour marquer des points selon vos objectifs." components={Bold} />
+          <Trans i18nKey="tuto.welcome" components={Bold} />
         )
       }
     },
@@ -50,8 +49,7 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     {
       popup: {
         text: () => (
-          <Trans i18nKey="tuto.step.1"
-            defaults="Voici vos objectifs ! Votre carte <bold>Couleur</bold> est secrète : vous seul·e savez que vous jouez le Vert. En revanche, les cartes <bold>Symbole</bold> autour de vous sont <bold>visibles de tous</bold> : elles indiquent les symboles à collectionner." components={Bold} />
+          <Trans i18nKey="tuto.step.1" components={Bold} />
         )
       },
       focus: (game) => ({
@@ -67,8 +65,7 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     {
       popup: {
         text: () => (
-          <Trans i18nKey="tuto.step.2"
-            defaults="Ces cartes Nombre sont sur la table. Si la valeur de votre carte est égale à une carte de la table, ou au <bold>total de plusieurs cartes</bold> de la table, vous les capturez ! Jouez votre <bold>Vert 5</bold> pour capturer la <bold>Bleu-vert 5</bold>." components={Bold} />
+          <Trans i18nKey="tuto.step.2" components={Bold} />
         )
       },
       focus: (game) => ({
@@ -90,8 +87,7 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     {
       popup: {
         text: () => (
-          <Trans i18nKey="tuto.step.3"
-            defaults="Votre <bold>Vert 5</bold> est en jeu ! Cliquez maintenant sur la <bold>Bleu-vert 5</bold> de la table — même valeur — pour la capturer." components={Bold} />
+          <Trans i18nKey="tuto.step.3" components={Bold} />
         ),
         position: { y: 20 }
       },
@@ -130,8 +126,7 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     {
       popup: {
         text: () => (
-          <Trans i18nKey="tuto.step.6"
-            defaults="À la fin de chaque tour, vous piochez 1 carte. Sofia n'a pas pu capturer et a dû <bold>poser sa carte sur la table sans prendre</bold>. À votre tour ! Jouez votre <bold>Bleu-vert 9</bold>." components={Bold} />
+          <Trans i18nKey="tuto.step.6" components={Bold} />
         )
       },
       focus: (game) => ({
@@ -153,8 +148,7 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     {
       popup: {
         text: () => (
-          <Trans i18nKey="tuto.step.7"
-            defaults="Vous pouvez capturer plusieurs cartes dont le <bold>total est égal</bold> à votre carte jouée. 2 + 7 = 9 ! Prenez d'abord la <bold>Vert 2</bold>." components={Bold} />
+          <Trans i18nKey="tuto.step.7" components={Bold} />
         ),
         position: { y: 20 }
       },
@@ -187,8 +181,7 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     {
       popup: {
         text: () => (
-          <Trans i18nKey="tuto.step.9"
-            defaults="Jeton Scopette ! Quand vous capturez la <bold>dernière carte de la table</bold>, ou jouez votre <bold>dernière carte en main</bold>, vous gagnez 1 jeton (1 point). Si les deux arrivent en même temps : <bold>4 jetons</bold> !" components={Bold} />
+          <Trans i18nKey="tuto.step.9" components={Bold} />
         ),
         position: { y: 20 }
       },
@@ -204,8 +197,7 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     {
       popup: {
         text: () => (
-          <Trans i18nKey="tuto.step.10"
-            defaults="En fin de partie : <bold>1 point</bold> par carte de votre couleur secrète, <bold>1 point</bold> par carte portant l'un des symboles des cartes qui vous <bold>entourent</bold> (visibles de tous !), <bold>1 point</bold> par carte Or (valeur 1, 4, 7 ou 10)." components={Bold} />
+          <Trans i18nKey="tuto.step.10" components={Bold} />
         )
       },
       focus: (game) => ({
@@ -221,8 +213,7 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     {
       popup: {
         text: () => (
-          <Trans i18nKey="tuto.step.11"
-            defaults="Vous pouvez aussi jouer <bold>plusieurs cartes de votre main</bold> pour capturer une seule carte de la table dont la valeur est égale à leur total. Si vous avez moins de 3 cartes, vous pouvez <bold>passer votre tour</bold>. À vous de jouer !" components={Bold} />
+          <Trans i18nKey="tuto.step.11" components={Bold} />
         )
       }
     },
@@ -231,8 +222,7 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     {
       popup: {
         text: () => (
-          <Trans i18nKey="tuto.step.12"
-                 defaults="La partie se termine quand la <bold>pioche est vide</bold>. Chaque joueur joue alors une <bold>dernière fois sans piocher</bold> — y compris celui qui a pris la dernière carte du deck." components={Bold} />
+          <Trans i18nKey="tuto.step.12" components={Bold} />
         )
       }
     },

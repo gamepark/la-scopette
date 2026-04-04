@@ -36,17 +36,17 @@ export class LaScopetteScoring implements ScoringDescription {
   getScoringHeader(key: ScoringKeys) {
     switch (key) {
       case ScoringKeys.Colors:
-        return <Trans i18nKey="game-over.score.type.colors" defaults="Couleurs" />
+        return <Trans i18nKey="game-over.score.type.colors" />
       case ScoringKeys.Symbols:
-        return <Trans i18nKey="game-over.score.type.symbols" defaults="Symboles" />
+        return <Trans i18nKey="game-over.score.type.symbols" />
       case ScoringKeys.GoldenCards:
-        return <Trans i18nKey="game-over.score.type.golden-cards" defaults="Cartes or" />
+        return <Trans i18nKey="game-over.score.type.golden-cards" />
       case ScoringKeys.Scopettes:
-        return <Trans i18nKey="game-over.score.type.scopettes" defaults="Jetons scopettes" />
+        return <Trans i18nKey="game-over.score.type.scopettes" />
       case ScoringKeys.Total:
         return (
           <div css={bold}>
-            <Trans i18nKey="game-over.score.type.total" defaults="Total" />
+            <Trans i18nKey="game-over.score.type.total" />
           </div>
         )
     }
@@ -64,7 +64,6 @@ export class LaScopetteScoring implements ScoringDescription {
                   <Trans
                     key={color}
                     i18nKey="game-over.score.points.colors"
-                    defaults="<color/> {points, plural, one{# point} other{# points}}"
                     components={{
                       color: <Picture src={this.getColorImage(color)} css={pictureCss} />,
                     }}
@@ -87,7 +86,6 @@ export class LaScopetteScoring implements ScoringDescription {
                   <Trans
                     key={symbol}
                     i18nKey="game-over.score.points.symbols"
-                    defaults="<symbol/> {points, plural, one{# point} other{# points}}"
                     components={{
                       symbol: <Picture src={this.getSymbolImage(symbol)} css={pictureCss} />,
                     }}
@@ -105,7 +103,6 @@ export class LaScopetteScoring implements ScoringDescription {
         return (
           <Trans
             i18nKey="game-over.score.points"
-            defaults="{points, plural, one{# point} other{# points}}"
             values={{
               points: scoreHelper.getPlayerGoldCardsScore(player)
             }}
@@ -115,7 +112,6 @@ export class LaScopetteScoring implements ScoringDescription {
         return (
           <Trans
             i18nKey="game-over.score.points"
-            defaults="{points, plural, one{# point} other{# points}}"
             values={{
               points: scoreHelper.getPlayerScopetteTokens(player)
             }}
@@ -126,7 +122,6 @@ export class LaScopetteScoring implements ScoringDescription {
           <div css={bold}>
             <Trans
               i18nKey="game-over.score.points"
-              defaults="{points, plural, one{# point} other{# points}}"
               values={{
                 points: scoreHelper.calculateScore(player)
               }}

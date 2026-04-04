@@ -16,8 +16,7 @@ export const PlayCardHeader = () => {
   if (itsMe) {
     if(pass) {
       return <Trans
-        i18nKey="header.play-card.you"
-        defaults="Jouez 1 ou plusieurs cartes ou <pass>Passer</pass>"
+        i18nKey="header.play-card.you.pass"
         components={{
           pass: <PlayMoveButton move={pass}/>
         }}
@@ -25,8 +24,7 @@ export const PlayCardHeader = () => {
     }
     if(dontTakeCards) {
       return <Trans
-        i18nKey="header.play-card.you"
-        defaults="Jouez 1 ou plusieurs cartes ou <dontTakeCards>Ne pas prendre de carte</dontTakeCards>"
+        i18nKey="header.play-card.you.dont-take-cards"
         components={{
           dontTakeCards: <PlayMoveButton move={dontTakeCards}/>
         }}
@@ -34,13 +32,11 @@ export const PlayCardHeader = () => {
     }
     return <Trans
       i18nKey="header.play-card.you"
-      defaults="Jouez 1 ou plusieurs cartes"
     />
   }
 
   return <Trans
     i18nKey="header.play-card.player"
-    defaults="{player} doit jouer 1 ou plusieurs cartes"
     values={{ player: name }}
   />
 }

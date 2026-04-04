@@ -7,7 +7,6 @@ export const DontTakeCardsLog: FC<MoveComponentProps<MaterialMove>> = () => {
   return (
     <Trans
       i18nKey="log.dont-take-cards"
-      defaults="sans capturer"
     />
   )
 }
