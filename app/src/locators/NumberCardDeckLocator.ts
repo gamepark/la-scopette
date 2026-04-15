@@ -33,7 +33,7 @@ class FaceCardDeckDescription extends LocationDescription {
 
     > span {
       position: absolute;
-      bottom: -4rem;
+      bottom: -5rem;
       left: 50%;
       transform: translateX(-50%);
       font-size: 1.75em;

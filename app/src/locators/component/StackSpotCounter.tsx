@@ -6,6 +6,5 @@ import { MaterialType } from '@gamepark/la-scopette/material/MaterialType'
 export const StackSpotCounter = () => {
   const rules = useRules<LaScopetteRules>()!
   const count = rules.material(MaterialType.NumberCard).location(LocationType.Deck).length
-  console.log(count)
-  return <span className="coucou">{count}</span>
+  return <span>{count}</span>
 }

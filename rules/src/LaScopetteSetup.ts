@@ -19,14 +19,14 @@ export class LaScopetteSetup extends MaterialGameSetup<number, MaterialType, Loc
     this.material(MaterialType.NumberCard).createItems(shuffle(numberCards).map(id => ({ id, location: { type:  LocationType.Deck} })))
     this.players.forEach( (player, index) => {
         this.material(MaterialType.NumberCard).location(LocationType.Deck).limit(3).moveItems({ type: LocationType.PlayerHand, player })
-        this.material(MaterialType.ColorCard).createItem({ id: colorCards[index], location: { type:  LocationType.PlayerColorCard, player} })
+        this.material(MaterialType.ColorCard).createItem({ id: colorCards[index], location: { type: LocationType.PlayerColorCard, player, rotation: true } })
         this.material(MaterialType.SymbolCard).createItem({ id: symbolCards[index], location: { type:  LocationType.PlayerSymbolCard, player} })
 
       }
     )
     if(this.players.length === 2) {
       this.players.forEach( (player, index) => {
-          this.material(MaterialType.ColorCard).createItem({ id: colorCards[index+2], location: { type:  LocationType.PlayerColorCard, player} })
+          this.material(MaterialType.ColorCard).createItem({ id: colorCards[index+2], location: { type: LocationType.PlayerColorCard, player, rotation: true } })
         }
       )
     }

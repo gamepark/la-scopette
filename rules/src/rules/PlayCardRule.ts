@@ -20,8 +20,12 @@ export class PlayCardRule extends PlayerTurnRule {
 
     const sumOfAlreadyTakenCards = this.remind(Memory.Sum) ?? 0
     if(sumOfAlreadyTakenCards === 0) {
-      moves.push(...this.playCardHelper.canPlayOtherCardIfWeCanTakeCardAfter())
-      moves.push(...this.playCardHelper.getCardWithTotalMoves())
+      if (this.cardsInPlay.length > 0) {
+        moves.push(...this.playCardHelper.canPlayOtherCardIfWeCanTakeCardAfter())
+      }
+      if (this.cardsInPlay.length > 1) {
+        moves.push(...this.playCardHelper.getCardWithTotalMoves())
+      }
     }
 
     return moves

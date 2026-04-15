@@ -3,6 +3,7 @@ import {
   hideItemId,
   hideItemIdToOthers,
   MaterialGame,
+  MaterialItem,
   MaterialMove,
   PositiveSequenceStrategy,
   SecretMaterialRules,
@@ -37,7 +38,8 @@ export class LaScopetteRules
       [LocationType.Deck]: new PositiveSequenceStrategy(),
       [LocationType.Table]: new PositiveSequenceStrategy(),
       [LocationType.PlayerHand]: new PositiveSequenceStrategy(),
-      [LocationType.CardsInPlayLayout]: new PositiveSequenceStrategy()
+      [LocationType.CardsInPlayLayout]: new PositiveSequenceStrategy(),
+      [LocationType.PlayerNumberCardsTakenStock]: new PositiveSequenceStrategy()
     },
     [MaterialType.ColorCard]: {
       [LocationType.PlayerColorCard]: new PositiveSequenceStrategy()
@@ -45,14 +47,15 @@ export class LaScopetteRules
   }
 
   hidingStrategies = {
-  [MaterialType.NumberCard]: {
-    [LocationType.Deck]: hideItemId,
-    [LocationType.PlayerHand]: hideItemIdToOthers
-  },
-  [MaterialType.ColorCard]: {
-    [LocationType.PlayerColorCard]: hideItemIdToOthers
+    [MaterialType.NumberCard]: {
+      [LocationType.Deck]: hideItemId,
+      [LocationType.PlayerHand]: hideItemIdToOthers
+    },
+    [MaterialType.ColorCard]: {
+      [LocationType.PlayerColorCard]: (item: MaterialItem, player?: number) =>
+        item.location.rotation ? hideItemIdToOthers(item, player) : []
+    }
   }
-}
 
   giveTime(): number {
     return 60

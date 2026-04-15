@@ -9,7 +9,10 @@ export class DrawCardRule extends PlayerTurnRule {
     const playerWhoEndedGame: number | undefined = this.remind(Memory.PlayerWhoEndedGame)
     if(playerWhoEndedGame !== undefined) {
       if(playerWhoEndedGame === this.player) {
-        return [this.endGame()]
+        const revealColorCards = this.material(MaterialType.ColorCard)
+            .location(LocationType.PlayerColorCard)
+            .rotateItems()
+        return [...revealColorCards, this.endGame()]
       }
       return [this.startPlayerTurn(RuleId.PlayCard, this.nextPlayer)]
     }

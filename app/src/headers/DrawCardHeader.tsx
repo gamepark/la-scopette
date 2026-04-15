@@ -1,5 +1,5 @@
 import { HeaderText } from '@gamepark/react-game'
 
 export const DrawCardHeader = () => {
-  return <HeaderText code="header.draw-card"/>
+  return <HeaderText code="draw-card"/>
 }

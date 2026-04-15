@@ -53,7 +53,15 @@ export class TutorialSetup extends LaScopetteSetup {
       location: { type: LocationType.PlayerColorCard, player: me }
     })
     this.material(MaterialType.ColorCard).createItem({
+      id: Colors.Pink,
+      location: { type: LocationType.PlayerColorCard, player: me }
+    })
+    this.material(MaterialType.ColorCard).createItem({
       id: Colors.Orange,
+      location: { type: LocationType.PlayerColorCard, player: opponent }
+    })
+    this.material(MaterialType.ColorCard).createItem({
+      id: Colors.Purple,
       location: { type: LocationType.PlayerColorCard, player: opponent }
     })
 

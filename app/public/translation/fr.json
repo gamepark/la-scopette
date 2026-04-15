@@ -38,7 +38,7 @@
   "game-over.score.points.symbols": "<symbol/> {points, plural, one{# point} other{# points}}",
   "game-over.score.points": "{points, plural, one{# point} other{# points}}",
   "tuto.welcome": "Bienvenue dans <bold>La Scopette</bold> ! Vous allez apprendre à jouer contre Sofia. Le but : capturer des cartes de la table pour marquer des points selon vos objectifs.",
-  "tuto.step.1": "Voici vos objectifs ! Votre carte <bold>Couleur</bold> est secrète : vous seul·e savez que vous jouez le Vert. En revanche, les cartes <bold>Symbole</bold> autour de vous sont <bold>visibles de tous</bold> : elles indiquent les symboles à collectionner.",
+  "tuto.step.1": "Voici vos objectifs ! Vos cartes <bold>Couleur</bold> sont secrètes : vous seul·e savez que vous jouez le Vert et le Rose. En revanche, les cartes <bold>Symbole</bold> autour de vous sont <bold>visibles de tous</bold> : elles indiquent les symboles à collectionner.",
   "tuto.step.2": "Ces cartes Nombre sont sur la table. Si la valeur de votre carte est égale à une carte de la table, ou au <bold>total de plusieurs cartes</bold> de la table, vous les capturez ! Jouez votre <bold>Vert 5</bold> pour capturer la <bold>Bleu-vert 5</bold>.",
   "tuto.step.3": "Votre <bold>Vert 5</bold> est en jeu ! Cliquez maintenant sur la <bold>Bleu-vert 5</bold> de la table — même valeur — pour la capturer.",
   "tuto.step.6": "À la fin de chaque tour, vous piochez 1 carte. Sofia n'a pas pu capturer et a dû <bold>poser sa carte sur la table sans prendre</bold>. À votre tour ! Jouez votre <bold>Bleu-vert 9</bold>.",
