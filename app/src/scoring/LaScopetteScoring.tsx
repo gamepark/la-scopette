@@ -25,7 +25,9 @@ enum ScoringKeys {
   Symbols,
   GoldenCards,
   Scopettes,
-  Total
+  Total,
+  TiebreakerCards,
+  TiebreakerScopettes
 }
 
 export class LaScopetteScoring implements ScoringDescription {
@@ -49,6 +51,10 @@ export class LaScopetteScoring implements ScoringDescription {
             <Trans i18nKey="game-over.score.type.total" />
           </div>
         )
+      case ScoringKeys.TiebreakerCards:
+        return <Trans i18nKey="game-over.score.type.tiebreaker-cards" />
+      case ScoringKeys.TiebreakerScopettes:
+        return <Trans i18nKey="game-over.score.type.tiebreaker-scopettes" />
     }
   }
 
@@ -127,6 +133,24 @@ export class LaScopetteScoring implements ScoringDescription {
               }}
             />
           </div>
+        )
+      case ScoringKeys.TiebreakerCards:
+        return (
+          <Trans
+            i18nKey="game-over.score.cards"
+            values={{
+              count: scoreHelper.getPlayerTakenCards(player).length
+            }}
+          />
+        )
+      case ScoringKeys.TiebreakerScopettes:
+        return (
+          <Trans
+            i18nKey="game-over.score.scopette-tokens"
+            values={{
+              count: scoreHelper.getPlayerScopetteTokens(player)
+            }}
+          />
         )
     }
   }
