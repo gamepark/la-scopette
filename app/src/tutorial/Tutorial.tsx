@@ -45,23 +45,40 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
       }
     },
 
-    // Étape 1 — Présentation des objectifs (couleur secrète + symboles visibles)
+    // Étape 1 — Cartes Couleur (secrètes + scoring couleur)
     {
       popup: {
         text: () => (
           <Trans i18nKey="tuto.step.1" components={Bold} />
-        )
+        ),
+        position: { y: 25 }
       },
       focus: (game) => ({
         materials: [
-          this.material(game, MaterialType.ColorCard).location(LocationType.PlayerColorCard).player(me),
-          this.material(game, MaterialType.SymbolCard).location(LocationType.PlayerSymbolCard).player(me),
-          this.material(game, MaterialType.SymbolCard).location(LocationType.PlayerSymbolCard).player(opponent)
-        ]
+          this.material(game, MaterialType.ColorCard).location(LocationType.PlayerColorCard).player(me)
+        ],
+        margin: { bottom: 8, top: 5, left: 5, right: 5 }
       })
     },
 
-    // Étape 2 — Explication capture + jouer Vert 5
+    // Étape 1b — Cartes Symbole (visibles + scoring symboles)
+    {
+      popup: {
+        text: () => (
+          <Trans i18nKey="tuto.step.1b" components={Bold} />
+        ),
+        position: { y: -25 }
+      },
+      focus: (game) => ({
+        materials: [
+          this.material(game, MaterialType.SymbolCard).location(LocationType.PlayerSymbolCard).player(me),
+          this.material(game, MaterialType.SymbolCard).location(LocationType.PlayerSymbolCard).player(opponent)
+        ],
+        margin: { bottom: 10, top: 5, left: 5, right: 5 }
+      })
+    },
+
+    // Étape 2 — Capture valeur égale + jouer Vert 5
     {
       popup: {
         text: () => (
@@ -73,7 +90,7 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
           this.material(game, MaterialType.NumberCard).location(LocationType.Table),
           this.material(game, MaterialType.NumberCard).id(Numbers.Green5)
         ],
-        margin: { bottom: 5 }
+        margin: { bottom: 5, top: 5, left: 5, right: 5 }
       }),
       move: {
         filter: (move, game) =>
@@ -95,7 +112,8 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
         materials: [
           this.material(game, MaterialType.NumberCard).location(LocationType.CardsInPlayLayout),
           this.material(game, MaterialType.NumberCard).id(Numbers.Teal5)
-        ]
+        ],
+        margin: { bottom: 5, top: 5, left: 5, right: 5 }
       }),
       move: {
         filter: (move, game) =>
@@ -103,6 +121,21 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
           move.location.type === LocationType.PlayerNumberCardsTakenStock &&
           game.items[MaterialType.NumberCard]?.[move.itemIndex]?.id === Numbers.Teal5
       }
+    },
+
+    // Étape 3b — Explication pioche (move automatique)
+    {
+      popup: {
+        text: () => (
+          <Trans i18nKey="tuto.step.3b" components={Bold} />
+        )
+      },
+      focus: (game) => ({
+        materials: [
+          this.material(game, MaterialType.NumberCard).location(LocationType.Deck)
+        ],
+        margin: { bottom: 5, top: 5, left: 5, right: 5 }
+      })
     },
 
     // Étapes 4 & 5 — Tour de Sofia (bot, sans popup)
@@ -122,11 +155,26 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
       }
     },
 
-    // Étape 6 — Explication pioche + poser sans prendre + jouer Bleu-vert 9
+    // Étape 6a — Sofia a posé sans prendre
     {
       popup: {
         text: () => (
-          <Trans i18nKey="tuto.step.6" components={Bold} />
+          <Trans i18nKey="tuto.step.6a" components={Bold} />
+        )
+      },
+      focus: (game) => ({
+        materials: [
+          this.material(game, MaterialType.NumberCard).location(LocationType.CardsInPlayLayout)
+        ],
+        margin: { bottom: 5, top: 5, left: 5, right: 5 }
+      })
+    },
+
+    // Étape 6b — Pioche + jouer Bleu-vert 9
+    {
+      popup: {
+        text: () => (
+          <Trans i18nKey="tuto.step.6b" components={Bold} />
         )
       },
       focus: (game) => ({
@@ -134,7 +182,7 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
           this.material(game, MaterialType.NumberCard).location(LocationType.PlayerHand).player(me),
           this.material(game, MaterialType.NumberCard).location(LocationType.Table)
         ],
-        margin: { bottom: 5 }
+        margin: { bottom: 5, top: 5, left: 5, right: 5 }
       }),
       move: {
         filter: (move, game) =>
@@ -144,7 +192,7 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
       }
     },
 
-    // Étape 7 — Prendre Vert 2 (première carte du total 9)
+    // Étape 7 — Capture par total + prendre Vert 2
     {
       popup: {
         text: () => (
@@ -157,7 +205,8 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
           this.material(game, MaterialType.NumberCard).location(LocationType.CardsInPlayLayout),
           this.material(game, MaterialType.NumberCard).id(Numbers.Green2),
           this.material(game, MaterialType.NumberCard).id(Numbers.Green7)
-        ]
+        ],
+        margin: { bottom: 5, top: 5, left: 5, right: 5 }
       }),
       move: {
         filter: (move, game) =>
@@ -177,23 +226,39 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
       }
     },
 
-    // Étape 9 — Explication jeton Scopette
+    // Étape 9a — Scopette : capturer la dernière carte de la table
     {
       popup: {
         text: () => (
-          <Trans i18nKey="tuto.step.9" components={Bold} />
+          <Trans i18nKey="tuto.step.9a" components={Bold} />
         ),
         position: { y: 20 }
       },
       focus: (game) => ({
         materials: [
-          this.material(game, MaterialType.ScopetteToken).location(LocationType.ScopetteTokenStock),
-          this.material(game, MaterialType.ScopetteToken).location(LocationType.PlayerScopetteTokenStock).player(me)
-        ]
+          this.material(game, MaterialType.ScopetteToken).location(LocationType.ScopetteTokenStock)
+        ],
+        margin: { bottom: 8, top: 5, left: 5, right: 5 }
       })
     },
 
-    // Étape 10 — Explication du score
+    // Étape 9b — Grand Scopette (4 jetons si les deux conditions simultanées)
+    {
+      popup: {
+        text: () => (
+          <Trans i18nKey="tuto.step.9b" components={Bold} />
+        ),
+        position: { y: 20 }
+      },
+      focus: (game) => ({
+        materials: [
+          this.material(game, MaterialType.ScopetteToken).location(LocationType.ScopetteTokenStock)
+        ],
+        margin: { bottom: 8, top: 5, left: 5, right: 5 }
+      })
+    },
+
+    // Étape 10 — Cartes Or
     {
       popup: {
         text: () => (
@@ -202,18 +267,26 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
       },
       focus: (game) => ({
         materials: [
-          this.material(game, MaterialType.ColorCard).location(LocationType.PlayerColorCard).player(me),
-          this.material(game, MaterialType.SymbolCard).location(LocationType.PlayerSymbolCard).player(me),
-          this.material(game, MaterialType.SymbolCard).location(LocationType.PlayerSymbolCard).player(opponent)
-        ]
+          this.material(game, MaterialType.NumberCard).id(Numbers.Gold4)
+        ],
+        margin: { bottom: 8, top: 5, left: 5, right: 5 }
       })
     },
 
-    // Étape 11 — Actions restantes + jeu libre
+    // Étape 11a — Jouer plusieurs cartes de main pour capturer 1 carte
     {
       popup: {
         text: () => (
-          <Trans i18nKey="tuto.step.11" components={Bold} />
+          <Trans i18nKey="tuto.step.11a" components={Bold} />
+        )
+      }
+    },
+
+    // Étape 11b — Passer son tour + jeu libre
+    {
+      popup: {
+        text: () => (
+          <Trans i18nKey="tuto.step.11b" components={Bold} />
         )
       }
     },
