@@ -1,5 +1,4 @@
 import { getEnumValues } from '@gamepark/rules-api'
-import { shuffle } from 'es-toolkit'
 
 export enum Symbols {
   Coin = 1,
@@ -10,4 +9,4 @@ export enum Symbols {
   ShootingStar
 }
 
-export const symbolCards = shuffle(getEnumValues(Symbols))
+export const symbolCards = getEnumValues(Symbols)

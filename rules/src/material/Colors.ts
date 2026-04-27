@@ -1,5 +1,4 @@
 import { getEnumValues } from '@gamepark/rules-api'
-import { shuffle } from 'es-toolkit'
 
 export enum Colors {
   Green = 1,
@@ -11,4 +10,4 @@ export enum Colors {
   Gold
 }
 
-export const colorCards = shuffle(getEnumValues(Colors).filter(color => color !== Colors.Gold))
+export const colorCards = getEnumValues(Colors).filter(color => color !== Colors.Gold)
