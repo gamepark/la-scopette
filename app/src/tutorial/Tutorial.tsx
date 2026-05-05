@@ -6,13 +6,13 @@ import { CustomMoveType } from '@gamepark/la-scopette/rules/CustomMoveType'
 import { MaterialTutorial, TutorialStep } from '@gamepark/react-game'
 import { isCustomMoveType, isMoveItemType } from '@gamepark/rules-api'
 import { Trans } from 'react-i18next'
-import { me, opponent, TutorialSetup } from './TutorialSetup'
+import { me, opponent, opponent2, opponent3, TutorialSetup } from './TutorialSetup'
 
 const Bold = { bold: <strong /> }
 
 export class Tutorial extends MaterialTutorial<number, MaterialType, LocationType> {
   version = 1
-  options = { players: [{ id: me }, { id: opponent }] }
+  options = { players: [{ id: me }, { id: opponent }, { id: opponent2 }, { id: opponent3 }] }
   setup = new TutorialSetup()
 
   players = [
@@ -31,6 +31,38 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
         eyebrowType: 'Default',
         mouthType: 'Smile',
         skinColor: 'Light'
+      }
+    },
+    {
+      id: opponent2,
+      name: 'Carlos',
+      avatar: {
+        topType: 'ShortHairShortFlat',
+        accessoriesType: 'Blank',
+        hairColor: 'Black',
+        facialHairType: 'Blank',
+        clotheType: 'Hoodie',
+        clotheColor: 'Blue03',
+        eyeType: 'Default',
+        eyebrowType: 'Default',
+        mouthType: 'Default',
+        skinColor: 'Brown'
+      }
+    },
+    {
+      id: opponent3,
+      name: 'Léa',
+      avatar: {
+        topType: 'LongHairCurly',
+        accessoriesType: 'Blank',
+        hairColor: 'Auburn',
+        facialHairType: 'Blank',
+        clotheType: 'BlazerShirt',
+        clotheColor: 'PastelGreen',
+        eyeType: 'Happy',
+        eyebrowType: 'Default',
+        mouthType: 'Smile',
+        skinColor: 'Pale'
       }
     }
   ]
@@ -72,7 +104,7 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
       focus: (game) => ({
         materials: [
           this.material(game, MaterialType.SymbolCard).location(LocationType.PlayerSymbolCard).player(me),
-          this.material(game, MaterialType.SymbolCard).location(LocationType.PlayerSymbolCard).player(opponent)
+          this.material(game, MaterialType.SymbolCard).location(LocationType.PlayerSymbolCard).player(opponent3)
         ],
         margin: { bottom: 10, top: 5, left: 5, right: 5 }
       })
@@ -155,7 +187,44 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
       }
     },
 
-    // Étape 6a — Sofia a posé sans prendre
+    // Étapes 4c & 4d — Tour de Carlos (bot, prend Orange3 avec Teal3)
+    {
+      move: {
+        player: opponent2,
+        filter: (move, game) =>
+          isMoveItemType(MaterialType.NumberCard)(move) &&
+          move.location.type === LocationType.CardsInPlayLayout &&
+          game.items[MaterialType.NumberCard]?.[move.itemIndex]?.id === Numbers.Teal3
+      }
+    },
+    {
+      move: {
+        player: opponent2,
+        filter: (move, game) =>
+          isMoveItemType(MaterialType.NumberCard)(move) &&
+          move.location.type === LocationType.PlayerNumberCardsTakenStock &&
+          game.items[MaterialType.NumberCard]?.[move.itemIndex]?.id === Numbers.Orange3
+      }
+    },
+
+    // Étapes 4e & 4f — Tour de Léa (bot, pose sans prendre)
+    {
+      move: {
+        player: opponent3,
+        filter: (move, game) =>
+          isMoveItemType(MaterialType.NumberCard)(move) &&
+          move.location.type === LocationType.CardsInPlayLayout &&
+          game.items[MaterialType.NumberCard]?.[move.itemIndex]?.id === Numbers.Orange6
+      }
+    },
+    {
+      move: {
+        player: opponent3,
+        filter: (move) => isCustomMoveType(CustomMoveType.DontTakeCards)(move)
+      }
+    },
+
+    // Étape 6a — Ce qui s'est passé chez les adversaires
     {
       popup: {
         text: () => (

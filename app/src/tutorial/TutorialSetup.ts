@@ -8,30 +8,41 @@ import { Symbols } from '@gamepark/la-scopette/material/Symbols'
 
 export const me = 1
 export const opponent = 2
+export const opponent2 = 3
+export const opponent3 = 4
 
-// Tutorial card setup:
-// P1 hand:  Green5(Green,Coin,5), Teal9(Teal,HorseShoe,9), Purple3
-// P2 hand:  Yellow8(Yellow,Coin,8), OrangeMinus2, PinkMinus2
-// Table:    Green2(Green,Shamrock,2), Teal5(Teal,HorseShoe,5), Green7(Green,HorseShoe,7), Orange3
-// P1 draws: Gold4 (top of deck, highest x)
-// P2 draws: Green1 (second from top)
-// Turn 1: P1 plays Green5, captures Teal5 (5=5) → stock: Green5(Green,Coin) + Teal5(HorseShoe) ✓
-// Turn 2: P1 plays Teal9, captures Green2+Green7 (2+7=9) → stock: Teal9(HorseShoe) + Green2(Green) + Green7(Green,HorseShoe) ✓
-// Sofia plays Yellow8 (value=8), can't capture [Green2,Green7,Orange3] ✓
+// Tutorial card setup (4 players):
+// P1 hand:  Green5(5), Teal9(9), Purple3(3)
+// P2 hand:  Yellow8(8), OrangeMinus2(-2), PinkMinus2(-2)
+// P3 hand:  Teal3(3), Yellow5(5), Purple4(4)
+// P4 hand:  Orange6(6), Pink8(8), Green9(9)
+// Table:    Green2(2), Teal5(5), Green7(7), Orange3(3)
+// Draws (round 2, highest x drawn first): P1←Gold4, P2←Green1, P3←Purple2, P4←Teal6
+// Round 1:
+//   P1 plays Green5, captures Teal5 (5=5) → table: Green2, Green7, Orange3
+//   P2 (Sofia) plays Yellow8, no capture   → table: Green2, Green7, Orange3, Yellow8
+//   P3 (Carlos) plays Teal3, captures Orange3 (3=3) → table: Green2, Green7, Yellow8
+//   P4 (Léa) plays Orange6, no capture (no 6 or combo=6 on table) → table: Green2, Green7, Yellow8, Orange6
+// Round 2:
+//   P1 plays Teal9, captures Green2+Green7 (2+7=9, only valid combo)
 const p1Hand = [Numbers.Green5, Numbers.Teal9, Numbers.Purple3]
 const p2Hand = [Numbers.Yellow8, Numbers.OrangeMinus2, Numbers.PinkMinus2]
+const p3Hand = [Numbers.Teal3, Numbers.Yellow5, Numbers.Purple4]
+const p4Hand = [Numbers.Orange6, Numbers.Pink8, Numbers.Green9]
 const tableCards = [Numbers.Green2, Numbers.Teal5, Numbers.Green7, Numbers.Orange3]
 const p1FirstDraw = Numbers.Gold4
 const p2FirstDraw = Numbers.Green1
+const p3FirstDraw = Numbers.Purple2
+const p4FirstDraw = Numbers.Teal6
 
 export class TutorialSetup extends LaScopetteSetup {
   setupMaterial(_options: LaScopetteOptions) {
-    const scriptedSet = new Set([...p1Hand, ...p2Hand, ...tableCards, p1FirstDraw, p2FirstDraw])
+    const scriptedSet = new Set([...p1Hand, ...p2Hand, ...p3Hand, ...p4Hand, ...tableCards, p1FirstDraw, p2FirstDraw, p3FirstDraw, p4FirstDraw])
     const fillerCards = numberCards.filter(n => !scriptedSet.has(n))
 
     // Create cards in order: deal order first, then filler, then draws (highest x drawn first)
     this.material(MaterialType.NumberCard).createItems(
-      [...p1Hand, ...p2Hand, ...tableCards, ...fillerCards, p2FirstDraw, p1FirstDraw].map(id => ({
+      [...p1Hand, ...p2Hand, ...p3Hand, ...p4Hand, ...tableCards, ...fillerCards, p4FirstDraw, p3FirstDraw, p2FirstDraw, p1FirstDraw].map(id => ({
         id,
         location: { type: LocationType.Deck }
       }))
@@ -42,18 +53,18 @@ export class TutorialSetup extends LaScopetteSetup {
       .moveItems({ type: LocationType.PlayerHand, player: me })
     this.material(MaterialType.NumberCard).location(LocationType.Deck).limit(3)
       .moveItems({ type: LocationType.PlayerHand, player: opponent })
+    this.material(MaterialType.NumberCard).location(LocationType.Deck).limit(3)
+      .moveItems({ type: LocationType.PlayerHand, player: opponent2 })
+    this.material(MaterialType.NumberCard).location(LocationType.Deck).limit(3)
+      .moveItems({ type: LocationType.PlayerHand, player: opponent3 })
 
     // Deal table
     this.material(MaterialType.NumberCard).location(LocationType.Deck).limit(4)
       .moveItems({ type: LocationType.Table })
 
-    // Fixed color cards (not shuffled)
+    // Fixed color cards (1 per player for 4-player game)
     this.material(MaterialType.ColorCard).createItem({
       id: Colors.Green,
-      location: { type: LocationType.PlayerColorCard, player: me }
-    })
-    this.material(MaterialType.ColorCard).createItem({
-      id: Colors.Pink,
       location: { type: LocationType.PlayerColorCard, player: me }
     })
     this.material(MaterialType.ColorCard).createItem({
@@ -61,8 +72,12 @@ export class TutorialSetup extends LaScopetteSetup {
       location: { type: LocationType.PlayerColorCard, player: opponent }
     })
     this.material(MaterialType.ColorCard).createItem({
+      id: Colors.Teal,
+      location: { type: LocationType.PlayerColorCard, player: opponent2 }
+    })
+    this.material(MaterialType.ColorCard).createItem({
       id: Colors.Purple,
-      location: { type: LocationType.PlayerColorCard, player: opponent }
+      location: { type: LocationType.PlayerColorCard, player: opponent3 }
     })
 
     // Fixed symbol cards (not shuffled)
@@ -73,6 +88,14 @@ export class TutorialSetup extends LaScopetteSetup {
     this.material(MaterialType.SymbolCard).createItem({
       id: Symbols.Coin,
       location: { type: LocationType.PlayerSymbolCard, player: opponent }
+    })
+    this.material(MaterialType.SymbolCard).createItem({
+      id: Symbols.Die,
+      location: { type: LocationType.PlayerSymbolCard, player: opponent2 }
+    })
+    this.material(MaterialType.SymbolCard).createItem({
+      id: Symbols.Shamrock,
+      location: { type: LocationType.PlayerSymbolCard, player: opponent3 }
     })
 
     // Scopette tokens
