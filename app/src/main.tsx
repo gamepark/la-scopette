@@ -1,4 +1,4 @@
-import { GameTemplateOptionsSpec } from '@gamepark/la-scopette/LaScopetteOptions.ts'
+import { LaScopetteOptionsSpec } from '@gamepark/la-scopette/LaScopetteOptions.ts'
 import { LaScopetteRules } from '@gamepark/la-scopette/LaScopetteRules.ts'
 import { LaScopetteSetup } from '@gamepark/la-scopette/LaScopetteSetup.ts'
 import { GameProvider } from '@gamepark/react-game'
@@ -17,7 +17,7 @@ createRoot(document.getElementById('root')!).render(
     <GameProvider
       game="la-scopette"
       Rules={LaScopetteRules}
-      optionsSpec={GameTemplateOptionsSpec}
+      optionsSpec={LaScopetteOptionsSpec}
       GameSetup={LaScopetteSetup}
       material={Material}
       locators={Locators}

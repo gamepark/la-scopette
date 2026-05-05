@@ -10,4 +10,4 @@ export type LaScopetteOptions = object
  * This object describes all the options a game can have, and will be used by GamePark website to create automatically forms for you game
  * (forms for friendly games, or forms for matchmaking preferences, for instance).
  */
-export const GameTemplateOptionsSpec: OptionsSpec<LaScopetteOptions> = {}
+export const LaScopetteOptionsSpec: OptionsSpec<LaScopetteOptions> = {}
