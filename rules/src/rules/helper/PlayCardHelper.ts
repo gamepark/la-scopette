@@ -16,13 +16,33 @@ export class PlayCardHelper extends MaterialRulesPart {
 
   canPlayOtherCardIfWeCanTakeCardAfter() {
     const moves: MaterialMove[] = []
-    this.playerCards.getItems().forEach(card => {
+    const currentTotal = this.calculTotalCardsInPlay()
+    const handItems = this.playerCards.getItems()
+
+    handItems.forEach(card => {
       const cardValue = numberCardData[card.id as Numbers].number
-      if (this.getCardWithTotalMoves(cardValue).length > 0) {
+      const otherHandItems = handItems.filter(c => c !== card)
+      if (this.canEventuallyCapture(currentTotal + cardValue, otherHandItems)) {
         moves.push(...this.playerCards.filter(c => c.id === card.id).moveItems({ type: LocationType.CardsInPlayLayout }))
       }
     })
     return moves
+  }
+
+  private canEventuallyCapture(total: number, remainingHandItems: { id?: unknown }[]): boolean {
+    // With multiple hand cards in play, capture requires a single table card with exact value
+    if (this.tableCards.getItems().some(c => numberCardData[c.id as Numbers].number === total)) {
+      return true
+    }
+
+    for (let i = 0; i < remainingHandItems.length; i++) {
+      const card = remainingHandItems[i]
+      const remaining = [...remainingHandItems.slice(0, i), ...remainingHandItems.slice(i + 1)]
+      const value = numberCardData[card.id as Numbers].number
+      if (this.canEventuallyCapture(total + value, remaining)) return true
+    }
+
+    return false
   }
 
   playOnCardIfNoCardInPlay() {
