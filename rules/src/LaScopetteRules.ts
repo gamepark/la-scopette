@@ -50,11 +50,11 @@ export class LaScopetteRules
     [MaterialType.NumberCard]: {
       [LocationType.Deck]: hideItemId,
       [LocationType.PlayerHand]: hideItemIdToOthers,
-      [LocationType.CardsInPlayLayout]: hideItemIdToOthers
+      [LocationType.CardsInPlayLayout]: hideItemIdToOtherIfRotated,
+      [LocationType.PlayerNumberCardsTakenStock]: hideItemIdToOtherIfRotated
     },
     [MaterialType.ColorCard]: {
-      [LocationType.PlayerColorCard]: (item: MaterialItem, player?: number) =>
-        item.location.rotation ? hideItemIdToOthers(item, player) : []
+      [LocationType.PlayerColorCard]: hideItemIdToOtherIfRotated
     }
   }
 
@@ -75,3 +75,6 @@ export class LaScopetteRules
     return undefined
   }
 }
+
+const hideItemIdToOtherIfRotated = (item: MaterialItem, player?: number) =>
+  item.location.rotation ? hideItemIdToOthers(item, player) : []

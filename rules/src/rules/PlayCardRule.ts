@@ -69,7 +69,10 @@ export class PlayCardRule extends PlayerTurnRule {
 
   onRuleEnd(_move: RuleMove<number, number>, _context?: PlayMoveContext): MaterialMove[] {
     if(this.cardsInPlay.length > 0) {
-      return this.cardsInPlay.moveItems({type: LocationType.PlayerNumberCardsTakenStock, player: this.player})
+      return [
+        this.cardsInPlay.moveItemsAtOnce({rotation: false}),
+        ...this.cardsInPlay.moveItems({type: LocationType.PlayerNumberCardsTakenStock, rotation: true, player: this.player})
+      ]
     }
     return []
   }

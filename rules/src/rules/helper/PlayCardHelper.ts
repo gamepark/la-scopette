@@ -23,7 +23,7 @@ export class PlayCardHelper extends MaterialRulesPart {
       const cardValue = numberCardData[card.id as Numbers].number
       const otherHandItems = handItems.filter(c => c !== card)
       if (this.canEventuallyCapture(currentTotal + cardValue, otherHandItems)) {
-        moves.push(...this.playerCards.filter(c => c.id === card.id).moveItems({ type: LocationType.CardsInPlayLayout, player: this.player }))
+        moves.push(...this.playerCards.filter(c => c.id === card.id).moveItems({ type: LocationType.CardsInPlayLayout, rotation: true, player: this.player }))
       }
     })
     return moves
@@ -48,7 +48,7 @@ export class PlayCardHelper extends MaterialRulesPart {
   playOnCardIfNoCardInPlay() {
     const moves: MaterialMove[] = []
     if(this.cardsInPlay.length === 0) {
-      moves.push(...this.playerCards.moveItems({ type: LocationType.CardsInPlayLayout, player: this.player }))
+      moves.push(...this.playerCards.moveItems({ type: LocationType.CardsInPlayLayout, rotation: true, player: this.player }))
     }
     return moves
   }
@@ -78,7 +78,7 @@ export class PlayCardHelper extends MaterialRulesPart {
     const total = this.calculTotalCardsInPlay() + extra
     const cardsWithTotal = this.tableCards.filter(c => numberCardData[c.id as Numbers].number === total)
     if(cardsWithTotal.length > 0) {
-      moves.push(...cardsWithTotal.moveItems({type: LocationType.PlayerNumberCardsTakenStock, player: this.player}))
+      moves.push(...cardsWithTotal.moveItems({type: LocationType.PlayerNumberCardsTakenStock, rotation: true, player: this.player}))
     }
     return moves
   }
@@ -101,12 +101,12 @@ export class PlayCardHelper extends MaterialRulesPart {
     }
 
     findSubsets(0, target, [])
-    return this.tableCards.filter(c => validIds.has(c.id as number)).moveItems({type: LocationType.PlayerNumberCardsTakenStock, player: this.player})
+    return this.tableCards.filter(c => validIds.has(c.id as number)).moveItems({type: LocationType.PlayerNumberCardsTakenStock, rotation: true, player: this.player})
   }
 
   calculTotalCardsInPlay() {
     const cards = this.cardsInPlay.getItems()
-    return cards.map(card => numberCardData[card.id as Numbers].number).reduce((acc, curr) => acc + curr, 0)
+    return cards.map(card => numberCardData[card.id as Numbers]?.number ?? 0).reduce((acc, curr) => acc + curr, 0)
   }
 
   get playerCards() {
@@ -118,6 +118,6 @@ export class PlayCardHelper extends MaterialRulesPart {
   }
 
   get cardsInPlay() {
-    return this.material(MaterialType.NumberCard).location(LocationType.CardsInPlayLayout)
+    return this.material(MaterialType.NumberCard).location(LocationType.CardsInPlayLayout).player(this.player)
   }
 }

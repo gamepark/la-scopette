@@ -3,7 +3,7 @@ import { LaScopetteRules } from '@gamepark/la-scopette/LaScopetteRules.ts'
 import { Colors } from '@gamepark/la-scopette/material/Colors.ts'
 import { Symbols } from '@gamepark/la-scopette/material/Symbols.ts'
 import { ScoreHelper } from '@gamepark/la-scopette/rules/helper/ScoreHelper.ts'
-import { StyledPlayerPanel, usePlayers, useRules } from '@gamepark/react-game'
+import { StyledPlayerPanel, usePlayers, usePlayerId, useRules } from '@gamepark/react-game'
 import { MaterialGame } from '@gamepark/rules-api'
 import { createPortal } from 'react-dom'
 import Green from '../images/Card/colors/ColorGreen.jpg'
@@ -29,6 +29,7 @@ import Panel6 from '../images/panels/panel6.jpg'
 
 export const PlayerPanels = () => {
   const players = usePlayers<number>({ sortFromMe: true })
+  const playerId = usePlayerId<number>()
   const root = document.getElementById('root')
   const rules = useRules<LaScopetteRules>()
   if (!root) {
@@ -41,7 +42,7 @@ export const PlayerPanels = () => {
         <StyledPlayerPanel
           key={player.id}
           player={player}
-          counters={getCounters(player.id, index, rules?.game)}
+          counters={getCounters(player.id, index, rules?.game, playerId !== undefined)}
           countersPerLine={6}
           css={panelPosition(index, players.length)}
           activeRing
@@ -53,21 +54,19 @@ export const PlayerPanels = () => {
   )
 }
 
-const getCounters = (playerId: number, index: number, game?: MaterialGame) => {
-  if(!game) return []
+const getCounters = (playerId: number, index: number, game?: MaterialGame, isPlayer?: boolean) => {
+  if(!game || index !== 0 || !isPlayer) return []
   const scoreHelper = new ScoreHelper(game)
   const counters = []
-  if(index === 0) {
-    const colors = scoreHelper.getPlayerColor(playerId)
-    for(const color of colors) {
-      counters.push({
-        image: getColorImage(color),
-        value: scoreHelper.getPlayerColorScore(playerId, color)
-      })
-    }
+  const colors = scoreHelper.getPlayerColor(playerId)
+  for (const color of colors) {
+    counters.push({
+      image: getColorImage(color),
+      value: scoreHelper.getPlayerColorScore(playerId, color)
+    })
   }
   const symbols = scoreHelper.getPlayerSymbols(playerId)
-  for(const symbol of symbols) {
+  for (const symbol of symbols) {
     counters.push({
       image: getSymbolImage(symbol),
       value: scoreHelper.getPlayerSymbolScore(playerId, symbol)

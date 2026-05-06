@@ -11,8 +11,11 @@ export class DrawCardRule extends PlayerTurnRule {
       if(playerWhoEndedGame === this.player) {
         const revealColorCards = this.material(MaterialType.ColorCard)
             .location(LocationType.PlayerColorCard)
-            .rotateItems()
-        return [...revealColorCards, this.endGame()]
+            .moveItemsAtOnce({ rotation: false})
+        const revealTakenCards = this.material(MaterialType.NumberCard)
+            .location(LocationType.PlayerNumberCardsTakenStock)
+            .moveItemsAtOnce({ rotation: false})
+        return [revealColorCards, revealTakenCards, this.endGame()]
       }
       return [this.startPlayerTurn(RuleId.PlayCard, this.nextPlayer)]
     }
