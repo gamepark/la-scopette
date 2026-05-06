@@ -49,7 +49,8 @@ export class LaScopetteRules
   hidingStrategies = {
     [MaterialType.NumberCard]: {
       [LocationType.Deck]: hideItemId,
-      [LocationType.PlayerHand]: hideItemIdToOthers
+      [LocationType.PlayerHand]: hideItemIdToOthers,
+      [LocationType.CardsInPlayLayout]: hideItemIdToOthers
     },
     [MaterialType.ColorCard]: {
       [LocationType.PlayerColorCard]: (item: MaterialItem, player?: number) =>

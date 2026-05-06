@@ -27,7 +27,7 @@ function createGame({
       [MaterialType.NumberCard]: [
         ...hand.map(id => ({ id, location: { type: LocationType.PlayerHand, player: PLAYER } })),
         ...table.map(id => ({ id, location: { type: LocationType.Table } })),
-        ...cardsInPlay.map(id => ({ id, location: { type: LocationType.CardsInPlayLayout } })),
+        ...cardsInPlay.map(id => ({ id, location: { type: LocationType.CardsInPlayLayout, player: PLAYER } })),
       ],
     },
     rule: { id: RuleId.PlayCard, player: PLAYER },

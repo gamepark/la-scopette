@@ -23,7 +23,7 @@ export class PlayCardHelper extends MaterialRulesPart {
       const cardValue = numberCardData[card.id as Numbers].number
       const otherHandItems = handItems.filter(c => c !== card)
       if (this.canEventuallyCapture(currentTotal + cardValue, otherHandItems)) {
-        moves.push(...this.playerCards.filter(c => c.id === card.id).moveItems({ type: LocationType.CardsInPlayLayout }))
+        moves.push(...this.playerCards.filter(c => c.id === card.id).moveItems({ type: LocationType.CardsInPlayLayout, player: this.player }))
       }
     })
     return moves
@@ -48,7 +48,7 @@ export class PlayCardHelper extends MaterialRulesPart {
   playOnCardIfNoCardInPlay() {
     const moves: MaterialMove[] = []
     if(this.cardsInPlay.length === 0) {
-      moves.push(...this.playerCards.moveItems({type: LocationType.CardsInPlayLayout}))
+      moves.push(...this.playerCards.moveItems({ type: LocationType.CardsInPlayLayout, player: this.player }))
     }
     return moves
   }

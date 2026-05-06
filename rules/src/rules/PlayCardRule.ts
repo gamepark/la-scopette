@@ -75,6 +75,6 @@ export class PlayCardRule extends PlayerTurnRule {
   }
 
   get cardsInPlay() {
-    return this.material(MaterialType.NumberCard).location(LocationType.CardsInPlayLayout)
+    return this.material(MaterialType.NumberCard).location(LocationType.CardsInPlayLayout).player(this.player)
   }
 }
