@@ -2,6 +2,7 @@ import { LaScopetteOptionsSpec } from '@gamepark/la-scopette/LaScopetteOptions.t
 import { LaScopetteRules } from '@gamepark/la-scopette/LaScopetteRules.ts'
 import { LaScopetteSetup } from '@gamepark/la-scopette/LaScopetteSetup.ts'
 import { GameProvider } from '@gamepark/react-game'
+import { theme } from './theme'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { gameAnimations } from './animations/GameAnimations'
@@ -25,6 +26,7 @@ createRoot(document.getElementById('root')!).render(
       logs={new LaScopetteLogDescription()}
       scoring={new LaScopetteScoring()}
       tutorial={new Tutorial()}
+      theme={theme}
     >
       <App />
     </GameProvider>
