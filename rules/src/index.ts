@@ -1,3 +1,3 @@
 export { LaScopetteRules } from '././LaScopetteRules'
-export { LaScopetteOptionsSpec } from './LaScopetteOptions'
+export { LaScopetteOptionsSpecV2 } from './LaScopetteOptions'
 export { LaScopetteSetup } from './LaScopetteSetup'
